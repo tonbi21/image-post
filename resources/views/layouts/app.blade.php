@@ -19,7 +19,7 @@
     </div>
     
     <!--フッター-->
-    <footer class="p-3 bg-dark text-white">
+    <footer class="p-3 bg-dark text-white fixed-bottom">
       <p class="text-center">&copy; 2020 tobi</p>
     </footer>
     

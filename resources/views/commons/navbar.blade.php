@@ -5,10 +5,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        {!! link_to_route('signup.get', 'signup', [], ['class' => 'nav-link']) !!}
-      </li>
-      
+      @if(Auth::check())
+        <li class="nav-item">
+          {!! link_to_route('logout.get', 'logout', [], ['class' => 'nav-link']) !!}
+        </li>
+      @else
+        <li class="nav-item">
+          {!! link_to_route('signup.get', 'signup', [], ['class' => 'nav-link']) !!}
+        </li>
+        <li class="nav-item">
+          {!! link_to_route('login.get', 'login', [], ['class' => 'nav-link']) !!}
+        </li>
+      @endif
     </ul>
   </div>
 </nav>
