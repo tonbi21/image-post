@@ -21,6 +21,9 @@
             <li class="nav-item">
               {!! link_to_route('logout.get', 'Logout', [], ['class' => 'nav-link']) !!}
             </li>
+            <li class="nav-item">
+              {!! link_to_route('posts.create', 'Create post', [], ['class' => 'nav-link']) !!}
+            </li>
             
           </ul>
         </li>
