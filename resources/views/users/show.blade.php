@@ -10,9 +10,13 @@
                 <img src="{{ Gravatar::get($user->email, ['size' => 150]) }}" class="mr-3 rounded-circle" alt="ユーザーアイコン">
             </div>
             <div class="col-sm-7">
-                <div class="user-menu">
+                <div class="user-menu h4">
                     {{ $user->name }}
-                    <a href="#" class="btn btn-primary">プロフィール編集</a>
+                    <!--プロフィール編集-->
+                    <i class="fas fa-cogs ml-3"></i>
+                    
+                    <!--フォローボタン-->
+                    @include('user_follow.follow_button')
                 </div>
                 
                 <div class="navbar">
@@ -21,10 +25,10 @@
                         投稿{{ $user->posts_count }}件
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">フォローワー数</a>
+                        フォロワー{!! link_to_route('users.followers', $user->followers_count, ['id' => $user->id]) !!}
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">フォロー数</a>
+                        フォロー{!! link_to_route('users.followings', $user->followings_count, ['id' => $user->id]) !!}
                       </li>
                     </ul>    
                 </div>

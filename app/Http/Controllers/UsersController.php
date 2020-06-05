@@ -15,10 +15,12 @@ class UsersController extends Controller
     public function index(){
         if(\Auth::check()){
             $users = User::orderBy('id', 'desc')->paginate(10);
+            $user = \Auth::user();
         }
         
         return view('users.index', [
-            'users' => $users
+            'users' => $users,
+            'user' => $user
         ]);
     }
     
@@ -50,5 +52,31 @@ class UsersController extends Controller
         
     }
     
+    public function followings($id){
+        $user = User::findOrFail($id);
+        $user->loadRelationshipCounts();
+        $followings = $user->followings()->paginate();
+        
+        return view('users.followings',[
+            'user' => $user,
+            'users' => $followings
+        ]);
+        
+        
+    }
+    
+    
+    public function followers($id){
+        $user = User::findOrFail($id);
+        $user->loadRelationshipCounts();
+        $followers = $user->followers()->paginate();
+        
+        return view('users.followers', [
+            'user' => $user,
+            'users' => $followers
+        ]);
+        
+      
+    }
     
 }
