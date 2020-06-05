@@ -5,7 +5,7 @@
     
     <div class="col-md-10 offset-md-1">
         <ul class="list-group">
-            <li class="list-group-item ">
+            <li class="list-group-item" style="background-color:#DCDCDC;">
                 <h4>{{ $user->name }}</h4>
                 <ul class="nav nav-pills nav-fill row">
                     <li class="nav-item col-md-3 offset-md-3">

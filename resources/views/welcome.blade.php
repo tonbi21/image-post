@@ -8,15 +8,15 @@
                     <div class="card mb-5">
                         <div class="card-header">
                             <li class="media">
-                                <img src="{{ Gravatar::get($user->email, ['size' => 30]) }}" class="mr-3 rounded-circle" alt="ユーザーアイコン">
+                                <img src="{{ Gravatar::get($post->user->email, ['size' => 30]) }}" class="mr-3 rounded-circle" alt="ユーザーアイコン">
                                 <div class="media-body">
-                                    <h5 class="mt-0 mb-1">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
+                                    <h5 class="mt-0 mb-1">{!! link_to_route('users.show', $post->user->name, ['user' => $user->id]) !!}</h5>
                                 </div>
                             </li>
                         </div>
                         <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" width=100% height=auto data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
                         <div class="card-body">
-                            <h5>{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
+                            <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $user->id]) !!}</h5>
                             <p>{{ $post->content }}</p>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="ather-user mt-5">
                     <ul class="list-unstyled">
-                        <h5>Users<span class="float-right">{!! link_to_route('users.index', 'Show All', [], ['class' => '']) !!}</span></h5>
+                        <h5>おすすめ<span class="float-right">{!! link_to_route('users.index', 'すべて見る', [], ['class' => '']) !!}</span></h5>
                         @foreach($users as $user)  
                           <li class="media mb-3">
                             <img src="{{ Gravatar::get($user->email, ['size' => 50]) }}" class="mr-3 rounded-circle" alt="ユーザーアイコン">

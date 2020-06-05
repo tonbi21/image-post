@@ -17,7 +17,7 @@ class PostsController extends Controller
         if (\Auth::check()){
             $users = User::orderBy('id', 'desc')->paginate(5);
             $user = \Auth::user();
-            $posts = $user->posts()->orderBy('created_at', 'desc')->paginate();
+            $posts = $user->feed_posts()->orderBy('created_at', 'desc')->paginate();
             
             $data = [
                 'users' => $users,

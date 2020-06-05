@@ -80,6 +80,14 @@ class User extends Authenticatable
     }
     
     
+    public function feed_posts(){
+        $userIds = $this->followings()->pluck('users.id')->toArray();
+        $userIds[] = $this->id;
+        
+        return Post::whereIn('user_id', $userIds);
+    }
+    
+    
 
     /**
      * The attributes that should be cast to native types.
