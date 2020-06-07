@@ -75,8 +75,18 @@ class UsersController extends Controller
             'user' => $user,
             'users' => $followers
         ]);
-        
-      
     }
     
+    
+    public function favorites($id){
+        if(\Auth::check()){
+            $user = User::findOrFail($id);
+            $favorites = $user->favorites()->orderBy('id', 'desc')->paginate();
+            $user->loadRelationshipCounts();
+        }
+        return view('users.favorites', [
+            'user' => $user,
+            'posts' => $favorites
+        ]);
+    }
 }

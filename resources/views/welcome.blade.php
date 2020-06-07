@@ -10,14 +10,17 @@
                             <li class="media">
                                 <img src="{{ Gravatar::get($post->user->email, ['size' => 30]) }}" class="mr-3 rounded-circle" alt="ユーザーアイコン">
                                 <div class="media-body">
-                                    <h5 class="mt-0 mb-1">{!! link_to_route('users.show', $post->user->name, ['user' => $user->id]) !!}</h5>
+                                    <h5 class="mt-0 mb-1">{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
                                 </div>
                             </li>
                         </div>
                         <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" width=100% height=auto data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
                         <div class="card-body">
-                            <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $user->id]) !!}</h5>
+                            <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
                             <p>{{ $post->content }}</p>
+                            
+                            <!--保存ボタン-->
+                            @include('favorites.favorite_button')
                         </div>
                     </div>
                     

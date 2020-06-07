@@ -43,12 +43,12 @@
         <!--自分の投稿と保存した投稿の切替バー-->
         <div class="navbar col-sm-10 offset-md-1">
             <ul class="nav nav-tabs text-center">
-              <li class="nav-item">
-                {!! link_to_route('users.show', '投稿', ['user' => $user->id], ['class' => 'nav-link active']) !!}
-              </li>
-              <li class="nav-item">
-                {!! link_to_route('users.favorites', '保存', ['id' => $user->id], ['class' => 'nav-link']) !!}
-              </li>
+                <li class="nav-item">
+                    {!! link_to_route('users.show', '投稿', ['user' => $user->id], ['class' => 'nav-link']) !!}
+                </li>
+                <li class="nav-item">
+                    {!! link_to_route('users.favorites', '保存', ['id' => $user->id], ['class' => 'nav-link active']) !!}
+                </li>
             </ul>
         </div>
         

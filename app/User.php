@@ -44,8 +44,13 @@ class User extends Authenticatable
     }
     
     
+    public function favorites(){
+        return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimestamps();
+    }
+    
+    
     public function loadRelationshipCounts(){
-        $this->loadCount(['posts', 'followings', 'followers']);
+        $this->loadCount(['posts', 'followings', 'followers', 'favorites']);
     }
     
     
@@ -87,6 +92,35 @@ class User extends Authenticatable
         return Post::whereIn('user_id', $userIds);
     }
     
+    
+    public function favorite($post_id){
+        $exist = $this->is_favorites($post_id);
+
+        if($exist){
+            return false;
+        }else{
+            $this->favorites()->attach($post_id);
+            return true;
+           
+        }
+    }
+    
+    
+    public function unfavorite($post_id){
+        $exist = $this->is_favorites($post_id);
+
+        if($exist){
+            $this->favorites()->detach($post_id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    public function is_favorites($post_id){
+        return $this->favorites()->where('post_id', $post_id)->exists();
+    }
     
 
     /**

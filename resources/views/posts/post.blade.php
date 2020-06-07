@@ -14,6 +14,12 @@
                         <div class="post-content">
                             <h5>{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
                             <p>{{ $post->content }}</p>
+                            
+                            <div class="text-right">
+                                <!--保存ボタンの設置-->
+                                @include('favorites.favorite_button')
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
