@@ -38,13 +38,17 @@ class UsersController extends Controller
     }
     
     //ユーザのプロフィール編集フォーム
-    public function edit($id){
-        
+    public function edit(User $user){
+        return view('users.edit', ['user' => $user]);
     }
     
     //ユーザのプロフィール編集
-    public function update($id){
+    public function update(Request $request, User $user){
+        $user->name = $request->name;
+        $user->introduction = $request->introduction;
+        $user->save();
         
+        return redirect('users/' . $user->id);
     }
     
     //ユーザの退会

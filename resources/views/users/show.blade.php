@@ -13,8 +13,11 @@
                 <div class="user-menu h4">
                     {{ $user->name }}
                     <!--プロフィール編集-->
-                    <i class="fas fa-cogs ml-3"></i>
-                    
+                    @if(Auth::id() === $user->id)
+                      <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn">
+                          <i class="fas fa-cogs ml-3"></i>プロフィール編集
+                      </a>
+                   @endif
                     <!--フォローボタン-->
                     @include('user_follow.follow_button')
                 </div>
@@ -34,7 +37,7 @@
                 </div>
                 
                 <div class="self-introduction" >
-                    自己紹介がここに入ります。
+                    {{ $user->introduction }}
                 </div>
             </div>
           </div>
