@@ -27,7 +27,7 @@ class UsersController extends Controller
     //ユーザ詳細
     public function show($id){
         if(\Auth::check()){
-            $user = User::findOrFail($id);
+            $user = User::find($id);
             $posts = $user->posts()->orderBy('id', 'desc')->paginate();
             $user->loadRelationshipCounts();
         }
@@ -44,6 +44,28 @@ class UsersController extends Controller
     
     //ユーザのプロフィール編集
     public function update(Request $request, User $user){
+        
+        $validator = Validator::make($request->all(), [
+            // 'file' => 'required|max:10240|mimes:jpeg,gif,png',
+            'file' => 'max:10240|mimes:jpeg,gif,png',
+            
+        ]);
+        
+        if($validator->fails()){
+            return back()->withInput()->withErrors($validator);
+        }
+        
+        if($request->has('file')) {
+            
+            $file = $request->file('file');
+            // dd($file);
+            $path = Storage::disk('s3')->putFile('/', $file, 'public');
+            
+            $user->user_image_file_name = $path;
+        }
+        
+        
+        
         $user->name = $request->name;
         $user->introduction = $request->introduction;
         $user->save();
@@ -53,6 +75,14 @@ class UsersController extends Controller
     
     //ユーザの退会
     public function destroy($id){
+        $user = User::findOrFail($id);
+        $posts = $user->posts();
+        if(\Auth::id() === $user->id){
+            $posts->delete();
+            $user->delete();
+        }
+       
+        return redirect('/');
         
     }
     

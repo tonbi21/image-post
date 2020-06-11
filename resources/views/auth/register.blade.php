@@ -28,7 +28,7 @@
             {!! Form::close() !!}
             
             <div class="bg-light text-dark text-center p-3 m-5">
-                <p class="h5">Already signup? {!! link_to_route('login.get', 'Login', [], ['class' => 'ml-3']) !!}</p>
+                <p class="h5">Already signup? {!! link_to_route('login', 'Login', [], ['class' => 'ml-3']) !!}</p>
             </div>
             
         </div>

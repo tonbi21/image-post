@@ -3,8 +3,8 @@
         
         <!--すでにフォロー済みなら表示-->
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal{{ $user->id }}">
-          Followings
+        <button type="button" class="btn btn-secondary btn-block w-50 mt-3" data-toggle="modal" data-target="#exampleModal{{ $user->id }}">
+          フォロー中
         </button>
         
         <!-- Modal -->
@@ -24,9 +24,9 @@
               </div>
               <div class="modal-footer">
                 {!! Form::open(['route' => ['user.unfollow', $user->id], 'method' => 'delete']) !!}
-                    {!! Form::submit('Unfollow', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::submit('フォロー解除', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
     
         <!--までフォーローしていなければ表示-->
         {!! Form::open(['route' => ['user.follow', $user->id]]) !!}
-            {!! Form::submit('Follow', ['class' => 'btn btn-primary btn-block']) !!}
+            {!! Form::submit('フォロー', ['class' => 'btn btn-primary btn-block w-50 mt-3']) !!}
         {!! Form::close() !!}
         
     @endif

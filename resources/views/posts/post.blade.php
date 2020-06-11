@@ -12,8 +12,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <div class="post-content">
-                            <h5>{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
-                            <p>{{ $post->content }}</p>
+                            <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
+                            <p>{!! nl2br(e($post->content)) !!}</p>
                             
                             <div class="text-right">
                                 <!--保存ボタンの設置-->
@@ -23,9 +23,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                        {!! Form::close() !!}
+                        @if(Auth::id() === $post->user->id)
+                            {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+                        @endif
                     </div>
                 </div>
             </div>

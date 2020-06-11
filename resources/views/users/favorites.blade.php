@@ -7,16 +7,28 @@
         <div class="col-md-10 offset-md-1">
           <div class="row">
             <div class="col-sm-5">
-                <img src="{{ Gravatar::get($user->email, ['size' => 150]) }}" class="mr-3 rounded-circle" alt="ユーザーアイコン">
+                <!--ユーザーのアイコン-->
+                @if(Auth::user()->user_image_file_name === 'images/topimage.jpg')
+                    <img src="images/topimage.jpg" alt="user_icon" class="mb-3 rounded-circle" width="13%" height="13%">
+                @else
+                    <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="rounded-circle mb-3" width="55%">
+                @endif
             </div>
             <div class="col-sm-7">
                 <div class="user-menu h4">
                     {{ $user->name }}
                     <!--プロフィール編集-->
-                    <i class="fas fa-cogs ml-3"></i>
+                    @if(Auth::id() === $user->id)
+                      <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn">
+                          <i class="fas fa-cogs ml-3"></i>プロフィール編集
+                      </a>
+                    @endif
                     
                     <!--フォローボタン-->
                     @include('user_follow.follow_button')
+                    
+                    <!--退会ボタン-->
+                    @include('users.delete_user_button')
                 </div>
                 
                 <div class="navbar">
@@ -33,8 +45,8 @@
                     </ul>    
                 </div>
                 
-                <div class="self-introduction" >
-                    自己紹介がここに入ります。
+                <div class="self-introduction mt-3" >
+                    {!! nl2br(e($user->introduction)) !!}
                 </div>
             </div>
           </div>
@@ -56,9 +68,10 @@
         <div class="row">
           <div class="col-md-10 offset-md-1">
             <div class="row">
+              
             @foreach($posts as $post)
               <div class="col-md-4 mb-3">
-                <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
               </div>
               
               <!--postをmodalで表示-->
