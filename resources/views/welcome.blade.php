@@ -3,6 +3,7 @@
 @section('content')
     @if(Auth::check())
         <div class="row">
+            <!--ここから投稿-->
             <div class="col-md-6 offset-md-1">
                 @foreach($posts as $post)
                     <div class="card mb-5">
@@ -16,26 +17,26 @@
                                 @endif
                                 
                                 <div class="media-body">
-                                    <h5 class="mt-2">{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
+                                    <h5 class="mt-0 mb-1">{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
                                 </div>
                             </li>
                         </div>
                         <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" width=100% height=auto data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
                         <div class="card-body">
                             <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
-                            <p>{!! nl2br(e($post->content)) !!}</p>
-                            
+                            <p>{{ $post->content }}</p>
                             
                             <!--保存ボタン-->
                             @include('favorites.favorite_button')
+                            <!--投稿日の表示-->
+                            {{ $post->created_at->format('Y/m/d') }}
                         </div>
                     </div>
-                    
                     <!--postをmodalで表示-->
                     @include('posts.post')
-                    
                 @endforeach
             </div>
+            <!--ここまで投稿-->
             
             <div class="col-md-3 d-none d-md-block">
                 <div class="auth-user">
@@ -65,7 +66,7 @@
                             @endif  
                             
                             <div class="media-body">
-                              <h5 class="mt-2">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
+                              <h5 class="mt-2 mb-0">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
                             </div>
                           </li>
                         @endforeach

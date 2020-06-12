@@ -18,7 +18,7 @@
                 
             </div>
             <div class="col-sm-7">
-                <div class="user-menu h3">
+                <div class="user-menu h4">
                     {{ $user->name }}
                     <!--プロフィール編集-->
                     @if(Auth::id() === $user->id)
@@ -33,15 +33,15 @@
                 </div>
                 
                 <div class="navbar">
-                    <ul class="nav justify-content-center h5">
-                      <li class="nav-item mr-3">
+                    <ul class="nav justify-content-center">
+                      <li class="nav-item">
                         投稿{{ $user->posts_count }}件
                       </li>
-                      <li class="nav-item mr-3">
-                        フォロワー{!! link_to_route('users.followers', $user->followers_count, ['id' => $user->id]) !!}人
+                      <li class="nav-item">
+                        フォロワー{!! link_to_route('users.followers', $user->followers_count, ['id' => $user->id]) !!}
                       </li>
-                      <li class="nav-item mr-3">
-                        フォロー{!! link_to_route('users.followings', $user->followings_count, ['id' => $user->id]) !!}人
+                      <li class="nav-item">
+                        フォロー{!! link_to_route('users.followings', $user->followings_count, ['id' => $user->id]) !!}
                       </li>
                     </ul>    
                 </div>
@@ -67,21 +67,17 @@
         </div>
         
         <!--投稿した画像一覧-->
-          <div class="col-md-10 offset-md-1">
+        <!--<div class="row"> ←これをコメントアウトしました--> 
+        <div class="col-md-10 offset-md-1">
             <div class="row">
-              @foreach($posts as $post)
-              
-                <div class="col-md-4 mb-3">
-                    <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
-                </div>
-                
-                <!--postをmodalで表示-->
-                @include('posts.post')
-                
-              @endforeach
+                @foreach($posts as $post)
+                    <div class="col-md-4 mb-3">
+                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                    </div>
+                    <!--postをmodalで表示-->
+                    @include('posts.post')
+                @endforeach
             </div>
-          </div>
-        
-        
+        </div>
     </div>
 @endsection
