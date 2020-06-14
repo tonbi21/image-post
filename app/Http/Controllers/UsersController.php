@@ -14,7 +14,7 @@ class UsersController extends Controller
     //ユーザの一覧表示
     public function index(){
         if(\Auth::check()){
-            $users = User::orderBy('id', 'desc')->paginate(10);
+            $users = User::orderBy('id', 'desc')->paginate(100);
             $user = \Auth::user();
         }
         
@@ -28,7 +28,7 @@ class UsersController extends Controller
     public function show($id){
         if(\Auth::check()){
             $user = User::find($id);
-            $posts = $user->posts()->orderBy('id', 'desc')->paginate();
+            $posts = $user->posts()->orderBy('id', 'desc')->paginate(99);
             $user->loadRelationshipCounts();
         }
         return view('users.show', [
@@ -89,7 +89,7 @@ class UsersController extends Controller
     public function followings($id){
         $user = User::findOrFail($id);
         $user->loadRelationshipCounts();
-        $followings = $user->followings()->paginate();
+        $followings = $user->followings()->paginate(100);
         
         return view('users.followings',[
             'user' => $user,
@@ -103,7 +103,7 @@ class UsersController extends Controller
     public function followers($id){
         $user = User::findOrFail($id);
         $user->loadRelationshipCounts();
-        $followers = $user->followers()->paginate();
+        $followers = $user->followers()->paginate(100);
         
         return view('users.followers', [
             'user' => $user,
@@ -115,7 +115,7 @@ class UsersController extends Controller
     public function favorites($id){
         if(\Auth::check()){
             $user = User::findOrFail($id);
-            $favorites = $user->favorites()->orderBy('id', 'desc')->paginate();
+            $favorites = $user->favorites()->orderBy('id', 'desc')->paginate(90);
             $user->loadRelationshipCounts();
         }
         return view('users.favorites', [

@@ -25,7 +25,7 @@
             
         </ul>
     </div>
-    
+    {{ $users->links() }}
 @endif
 
 

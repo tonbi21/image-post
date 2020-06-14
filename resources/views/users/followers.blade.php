@@ -34,8 +34,8 @@
                     </ul>
                 </li>
             @endforeach
-            
         </ul>
+        {{ $users->links() }}
     </div>
 
 @endsection

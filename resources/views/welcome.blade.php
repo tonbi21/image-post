@@ -35,6 +35,8 @@
                     <!--postをmodalで表示-->
                     @include('posts.post')
                 @endforeach
+                
+                {{ $posts->links() }}
             </div>
             <!--ここまで投稿-->
             

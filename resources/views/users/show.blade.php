@@ -78,6 +78,7 @@
                     @include('posts.post')
                 @endforeach
             </div>
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection
