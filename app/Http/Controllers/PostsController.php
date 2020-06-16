@@ -49,8 +49,7 @@ class PostsController extends Controller
         
         $file = $request->file('file');
         // dd($file);
-        $path = Storage::disk('s3')->putFile('/', $file, 'public');
-        
+        $path = Storage::disk('s3')->putFile('posts/'.\Auth::id(), $file, 'public');
         Post::create([
             'user_id' => \Auth::user()->id,
             'image_file_name' => $path,

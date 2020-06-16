@@ -60,7 +60,7 @@ class UsersController extends Controller
             
             $file = $request->file('file');
             // dd($file);
-            $path = Storage::disk('s3')->putFile('/', $file, 'public');
+            $path = Storage::disk('s3')->putFile('user/'.$user->id, $file, 'public');
             
             $user->user_image_file_name = $path;
         }
@@ -78,9 +78,19 @@ class UsersController extends Controller
     public function destroy($id){
         $user = User::findOrFail($id);
         $posts = $user->posts();
+        
+        
+        $dir_post = 'posts/'.\Auth::id();
+        $dir_user = 'user/'.\Auth::id();
+        $disk = Storage::disk('s3');
+        
+        
         if(\Auth::id() === $user->id){
             $posts->delete();
+            $disk->deleteDirectory($dir_post);
+            $disk->deleteDirectory($dir_user);
             $user->delete();
+            
         }
        
         return redirect('/');
