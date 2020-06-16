@@ -12,7 +12,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <div class="post-content">
-                            <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $user->id]) !!}</h5>
+                            <h5>{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
                             <p>{!! nl2br(e($post->content)) !!}</p>
                             
                             <div class="text-right" id="post{{ $post->id }}">

@@ -3,12 +3,12 @@
         
         <!--すでにフォロー済みなら表示-->
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-secondary btn-block w-50 mt-3" data-toggle="modal" data-target="#exampleModal{{ $user->id }}">
+        <button type="button" class="btn btn-secondary btn-block w-50 mt-3" data-toggle="modal" data-target="#exampleModalFollow{{ $user->id }}">
           フォロー中
         </button>
         
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModalFollow{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
