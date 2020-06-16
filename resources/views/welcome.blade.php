@@ -10,14 +10,17 @@
                         <div class="card-header">
                             <li class="media">
                                 <!--ユーザーアイコンの表示-->
-                                @if($post->user->user_image_file_name === 'images/topimage.jpg')
-                                    <img src="images/topimage.jpg" alt="user_icon" class="mr-3 rounded-circle" width="10%" height="10%">
-                                @else
-                                    <img src= "{{ Storage::disk('s3')->url($post->user->user_image_file_name) }}" alt="user_icon" class="mr-3 rounded-circle" width="10%" height="10%">
-                                @endif
+                                <div class="user-icon-post">
+                                    @if($post->user->user_image_file_name === 'images/topimage.jpg')
+                                        <img src="images/topimage.jpg" alt="user_icon" class="img-circle mr-3">
+                                    @else
+                                        <img src= "{{ Storage::disk('s3')->url($post->user->user_image_file_name) }}" alt="user_icon" class="img-circle mr-3">
+                                    @endif
+                                </div>
+                                
                                 
                                 <div class="media-body">
-                                    <h5 class="mt-0 mb-1">{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
+                                    <h5 class="mt-2 ml-2">{!! link_to_route('users.show', $post->user->name, ['user' => $post->user->id]) !!}</h5>
                                 </div>
                             </li>
                         </div>
@@ -44,14 +47,16 @@
                 <div class="auth-user">
                     <li class="media">
                         <!--ユーザーアイコンの表示-->
-                        @if(Auth::user()->user_image_file_name === 'images/topimage.jpg')
-                            <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="mr-3 rounded-circle" width="30%" height="30%">
-                        @else
-                            <img src= "{{ Storage::disk('s3')->url(Auth::user()->user_image_file_name) }}" alt="user_icon" class="mr-3 rounded-circle" width="30%" height="30%">
-                        @endif
+                        <div class="user-icon-login-user">
+                            @if(Auth::user()->user_image_file_name === 'images/topimage.jpg')
+                                <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="img-circle">
+                            @else
+                                <img src= "{{ Storage::disk('s3')->url(Auth::user()->user_image_file_name) }}" alt="user_icon" class="img-circle">
+                            @endif
+                        </div>
                         
                         <div class="media-body">
-                            <h5 class="mt-3 mb-0">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
+                            <h5 class="mt-4 ml-3">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
                         </div>
                     </li>
                 </div>
@@ -60,15 +65,18 @@
                         <h5>おすすめ<span class="float-right">{!! link_to_route('users.index', 'すべて見る', [], ['class' => '']) !!}</span></h5>
                         @foreach($users as $user)  
                           <li class="media mb-3">
+                              
                             <!--ユーザーアイコンの表示-->
-                            @if($user->user_image_file_name === 'images/topimage.jpg')
-                                <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="mr-3 rounded-circle" width="23%" height="23%">
-                            @else
-                                <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="mr-3 rounded-circle" width="23%" height="23%">
-                            @endif  
+                            <div class="user-icon-ather-user">
+                                @if($user->user_image_file_name === 'images/topimage.jpg')
+                                    <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="img-circle">
+                                @else
+                                    <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="img-circle">
+                                @endif  
+                            </div>
                             
                             <div class="media-body">
-                              <h5 class="mt-2 mb-0">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
+                              <h5 class="mt-3 ml-3">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
                             </div>
                           </li>
                         @endforeach

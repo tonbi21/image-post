@@ -48,6 +48,7 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             // 'file' => 'required|max:10240|mimes:jpeg,gif,png',
             'file' => 'max:10240|mimes:jpeg,gif,png',
+            'name' => 'required|max:255',
             
         ]);
         

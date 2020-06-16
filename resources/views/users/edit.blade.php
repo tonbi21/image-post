@@ -24,15 +24,17 @@
                     <div class="col-5 offset-1">
                         <p>
                             現在のアイコン
-                            @if($user->user_image_file_name === 'images/topimage.jpg')
-                                <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="mr-3 rounded-circle" width="10%">
-                            @else
-                                <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="mr-3 rounded-circle" width="25%">
-                            @endif
+                            <div class="user-icon-login-user">
+                                @if($user->user_image_file_name === 'images/topimage.jpg')
+                                    <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="img-circle">
+                                @else
+                                    <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="img-circle">
+                                @endif
+                            </div>
                         </p>
                     </div>
                 </div>
-                {!! Form::submit('編集', ['class' => 'btn btn-primary col-4 offset-sm-4 mt-3']) !!}
+                {!! Form::submit('編集', ['class' => 'btn btn-primary col-4 offset-4 mt-3']) !!}
             {!! Form::close() !!}
             
         </div>

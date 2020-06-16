@@ -8,11 +8,14 @@
           <div class="row">
             <div class="col-sm-5">
                 <!--ユーザーのアイコン-->
-                @if($user->user_image_file_name === 'images/topimage.jpg')
-                    <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="mb-3 rounded-circle" width="55%">
-                @else
-                    <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="rounded-circle mb-3" width="55%">
-                @endif
+                <div class="user-icon-show">
+                    @if($user->user_image_file_name === 'images/topimage.jpg')
+                        <img src="{{ secure_asset('images/topimage.jpg') }}" alt="user_icon" class="img-circle">
+                    @else
+                        <img src= "{{ Storage::disk('s3')->url($user->user_image_file_name) }}" alt="user_icon" class="img-circle">
+                    @endif
+                </div>
+                
             </div>
             <div class="col-sm-7">
                 <div class="user-menu h4">
@@ -53,7 +56,7 @@
         </div>
         
         <!--自分の投稿と保存した投稿の切替バー-->
-        <div class="navbar col-sm-10 offset-md-1">
+        <div class="navbar col-lg-10 offset-lg-1 mt-3">
             <ul class="nav nav-tabs text-center">
                 <li class="nav-item">
                     {!! link_to_route('users.show', '投稿', ['user' => $user->id], ['class' => 'nav-link']) !!}
@@ -65,11 +68,27 @@
         </div>
         
         <!--投稿した画像一覧-->
-        <div class="col-md-10 offset-md-1">
+        <div class="col-lg-10 offset-lg-1">
             <div class="row">
                 @foreach($posts as $post)
-                    <div class="col-md-4 mb-3">
-                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                     <div class="col-4 mb-3 d-none d-xl-block">
+                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square-xl img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                    </div>
+                    
+                    <div class="col-4 mb-3 d-none d-lg-block d-xl-none">
+                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square-lg img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                    </div>
+                    
+                    <div class="col-4 mb-3 d-none d-md-block d-lg-none">
+                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square-md img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                    </div>
+                    
+                    <div class="col-4 mb-3 d-none d-sm-block d-md-none">
+                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square-sm img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
+                    </div>
+                    
+                    <div class="col-4 mb-3 d-none d-block d-sm-none">
+                        <img src= "{{ Storage::disk('s3')->url($post->image_file_name) }}" alt="post_image" class="img-square-xs img-fluid" data-toggle="modal" data-target="#exampleModal{{ $post->id }}">
                     </div>
                     
                     <!--postをmodalで表示-->
