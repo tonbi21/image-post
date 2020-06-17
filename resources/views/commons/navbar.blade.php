@@ -15,7 +15,7 @@
                 @endif
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-              {!! link_to_route('users.show', 'マイプロイフィール', ['user' => Auth::id()], ['class' => 'nav-link dropdown-item']) !!}
+              {!! link_to_route('users.show', 'マイプロフィール', ['user' => Auth::id()], ['class' => 'nav-link dropdown-item']) !!}
               {!! link_to_route('users.index', 'ユーザー一覧', [], ['class' => 'nav-link dropdown-item']) !!}
               {!! link_to_route('posts.create', '新規投稿', [], ['class' => 'nav-link dropdown-item']) !!}
               {!! link_to_route('logout.get', 'ログアウト', [], ['class' => 'nav-link dropdown-item']) !!}

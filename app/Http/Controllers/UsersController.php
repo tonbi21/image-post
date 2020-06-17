@@ -46,7 +46,6 @@ class UsersController extends Controller
     public function update(Request $request, User $user){
         
         $validator = Validator::make($request->all(), [
-            // 'file' => 'required|max:10240|mimes:jpeg,gif,png',
             'file' => 'max:10240|mimes:jpeg,gif,png',
             'name' => 'required|max:255',
             
@@ -59,13 +58,10 @@ class UsersController extends Controller
         if($request->has('file')) {
             
             $file = $request->file('file');
-            // dd($file);
             $path = Storage::disk('s3')->putFile('user/'.$user->id, $file, 'public');
             
             $user->user_image_file_name = $path;
         }
-        
-        
         
         $user->name = $request->name;
         $user->introduction = $request->introduction;
