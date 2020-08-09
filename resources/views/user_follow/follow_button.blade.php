@@ -3,7 +3,7 @@
         
         <!--すでにフォロー済みなら表示-->
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-secondary btn-block w-50 mt-3" data-toggle="modal" data-target="#exampleModalFollow{{ $user->id }}">
+        <button type="button" class="btn btn-secondary btn-block mt-3" data-toggle="modal" data-target="#exampleModalFollow{{ $user->id }}">
           フォロー中
         </button>
         
@@ -36,7 +36,7 @@
     
         <!--までフォーローしていなければ表示-->
         {!! Form::open(['route' => ['user.follow', $user->id]]) !!}
-            {!! Form::submit('フォロー', ['class' => 'btn btn-primary btn-block w-50 mt-3']) !!}
+            {!! Form::submit('フォロー', ['class' => 'btn btn-primary btn-block mt-3']) !!}
         {!! Form::close() !!}
         
     @endif

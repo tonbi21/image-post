@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
             
-            {!! Form::open(['route' => ['users.update', $user->id], 'method' => 'put','files' => true]) !!}
+            {!! Form::open(['route' => ['users.update', ['user' => $user->id]], 'method' => 'put','files' => true]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'ユーザーネーム') !!}
                     {!! Form::text('name', $user->name, ['class' => 'form-controll w-100']) !!}

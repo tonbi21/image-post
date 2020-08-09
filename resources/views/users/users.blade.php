@@ -19,6 +19,10 @@
                             <div class="media-body ml-3">
                                 <h5 class="mb-2">{!! link_to_route('users.show', $user->name, ['user' => $user->id]) !!}</h5>
                                 <p>{!! nl2br(e($user->introduction)) !!}</p>
+                                <div class="float-right">
+                                    <!--フォローボタン-->
+                                    @include('user_follow.follow_button')
+                                </div>
                             </div>
                         </li>
                     </ul>
